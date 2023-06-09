@@ -1,0 +1,14 @@
+data <- data.frame(interval = c("1-5", "5-15", "15-20", "20-50", "50-80", "80-110"),
+                   frequency = c(200, 450, 300, 1500, 700, 44))
+
+data
+data$cumulative_frequency <- cumsum(data$frequency)
+
+median_interval <- data$interval[min(which(data$cumulative_frequency >= sum(data$frequency)/2))]
+
+lower_bound <- as.numeric(strsplit(median_interval, "-")[[1]][1])
+upper_bound <- as.numeric(strsplit(median_interval, "-")[[1]][2])
+
+median <- (lower_bound + upper_bound)/2
+
+median
